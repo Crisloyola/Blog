@@ -1,5 +1,13 @@
 const API_URL = "http://localhost:5291/api/posts";
 
+interface Comment {
+  id: number;
+  commentDate: string;
+  content: string;
+  userName: string;
+  postId: number;
+}
+
 export async function createPost(title: string, category: string, content: string, authorId: string, token: string) {
   const body = { Title: title, Category: category, Content: content, AuthorId: authorId, PublishDate: new Date().toISOString() };
   console.log("Creating post with body:", body);
@@ -34,7 +42,7 @@ export async function getPosts(token: string) {
 }
 
 export async function getComments(postId: number, token: string) {
-  const res = await fetch(`${API_URL}/${postId}/comments`, {
+  const res = await fetch("http://localhost:5291/api/comments", {
     headers: {
       Authorization: `Bearer ${token}`
     }
@@ -44,11 +52,12 @@ export async function getComments(postId: number, token: string) {
     const errorText = await res.text();
     throw new Error(`Error al obtener comentarios: ${res.status} ${res.statusText} - ${errorText}`);
   }
-  return res.json();
+  const allComments: Comment[] = await res.json();
+  return allComments.filter(comment => comment.postId === postId);
 }
 
 export async function createComment(postId: number, content: string, userName: string, token: string) {
-  const body = { Content: content, UserName: userName, PostId: postId };
+  const body = { Content: content, UserName: userName, PostId: postId, CommentDate: new Date().toISOString() };
   console.log("Creating comment with body:", body);
   const res = await fetch("http://localhost:5291/api/comments", {
     method: "POST",
