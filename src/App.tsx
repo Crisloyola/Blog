@@ -7,6 +7,7 @@ import EditorPage from "./pages/EditorPage";
 import ReaderPage from "./pages/ReaderPage";
 import { ProtectedRoute } from "./Components/ProtectedRoute";
 import { RoleRoute } from "./Components/RoleRoute";
+import "./index.css"
 
 export default function AppRouter() {
   return (
