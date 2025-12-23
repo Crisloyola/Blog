@@ -106,7 +106,13 @@ export default function RegisterPage() {
 
           <div>
             <div className="mt-5">
-              <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Register</button>
+              <button type="submit" 
+              className="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+              >Register</button>
+            </div>
+            
+            <div className="mt-2">
+              <a href="" onClick={()=> navigate("/")} className="text-sm/6 font-semibold text-white">¿Ya tienes una cuenta? Inicia sesión aquí</a>
             </div>
           </div>
           
