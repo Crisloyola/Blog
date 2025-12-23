@@ -42,7 +42,7 @@ export default function EditorPage() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [comments, setComments] = useState<{ [postId: number]: Comment[] }>({});
   const [commentTexts, setCommentTexts] = useState<{ [key: number]: string }>({});
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
 
   const navigate = useNavigate();
@@ -282,6 +282,7 @@ export default function EditorPage() {
 
                         <button 
                           type="submit" 
+
                           onClick={() => setOpen(false)}
                           className="inline-flex w-full justify-center rounded-md bg-green-700 px-3 py-2 text-sm font-semibold text-white hover:bg-green-500 sm:ml-3 sm:w-auto"
                         >Create Post</button>
