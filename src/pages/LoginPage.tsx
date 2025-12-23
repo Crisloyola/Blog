@@ -44,9 +44,10 @@ export default function LoginPage() {
               <div className="text-sm">
                 <a href="#" className="font-semibold text-indigo-400 hover:text-indigo-300">Forgot password?</a>
               </div>
-          </div>
+            </div>
           <div>
-              <div className="mt-2">
+
+          <div className="mt-2">
                <input type="password" 
                 name="password"
                 required autoComplete="current-password"
