@@ -1,12 +1,20 @@
 import { createContext, useContext, useState } from "react";
-import type { AuthResponseDto} from "../types/auth.types";
+import type { AuthResponseDto } from "../types/auth.types";
 import { UserRole } from "../types/roles.types";
+
+interface UpdateUserPayload {
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
+}
 
 interface AuthContextType {
   user: AuthResponseDto | null;
   token: string | null;
   loginUser: (data: AuthResponseDto) => void;
   logout: () => void;
+  updateUser: (data: UpdateUserPayload) => void;
   isAuthenticated: boolean;
   role: UserRole | null;
 }
@@ -31,6 +39,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     localStorage.removeItem("token");
   };
 
+  // ✅ FUNCIÓN CORRECTA PARA ACTUALIZAR USER
+  const updateUser = (data: UpdateUserPayload) => {
+    setUser(prev =>
+      prev ? { ...prev, ...data } : prev
+    );
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -38,6 +53,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         token,
         loginUser,
         logout,
+        updateUser,
         isAuthenticated: !!token,
         role: user?.role ?? null,
       }}

@@ -1,12 +1,6 @@
+import { Comment } from "../types/comment.types";
 const API_URL = "http://localhost:5291/api/posts";
 
-interface Comment {
-  id: number;
-  commentDate: string;
-  content: string;
-  userName: string;
-  postId: number;
-}
 
 export async function createPost(title: string, category: string, content: string, authorId: string, token: string) {
   const body = { Title: title, Category: category, Content: content, AuthorId: authorId, PublishDate: new Date().toISOString() };
@@ -72,5 +66,19 @@ export async function createComment(postId: number, content: string, userName: s
     const errorText = await res.text();
     console.error("Create comment error:", res.status, res.statusText, errorText);
     throw new Error(`Error al crear comentario: ${res.status} ${res.statusText} - ${errorText}`);
+  }
+}
+
+export async function deletePost(postId: number, token: string) {
+  const res = await fetch(`${API_URL}/${postId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+  if (!res.ok) {
+    const errorText = await res.text();
+    console.error("Delete post error:", res.status, res.statusText, errorText);
+    throw new Error(`Error al eliminar post: ${res.status} ${res.statusText} - ${errorText}`);
   }
 }

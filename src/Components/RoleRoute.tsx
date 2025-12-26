@@ -12,7 +12,7 @@ export function RoleRoute({
   const { role } = useAuth();
 
   if (!role || !allowedRoles.includes(role)) {
-    return <Navigate to="/dashboard" />;
+    return <Navigate to="/" />;
   }
 
   return children;
